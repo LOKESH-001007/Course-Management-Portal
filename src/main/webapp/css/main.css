@@ -89,6 +89,9 @@ body.auth-page {
     height: var(--navbar-h);
     box-shadow: 0 2px 12px rgba(0,0,0,.25);
     padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
 }
 
 .navbar-admin .navbar-brand { font-weight: 700; font-size: 1.15rem; letter-spacing: -.3px; }
@@ -112,6 +115,9 @@ body.auth-page {
     height: var(--navbar-h);
     box-shadow: 0 2px 12px rgba(102,126,234,.4);
     padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
 }
 
 .navbar-student .navbar-brand { font-weight: 700; font-size: 1.15rem; }
@@ -456,6 +462,50 @@ body.auth-page {
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 991px) {
+
+    /* Navbar height becomes auto when toggler is used */
+    .navbar-admin,
+    .navbar-student {
+        height: auto;
+        min-height: var(--navbar-h);
+        padding: 0 1rem;
+    }
+
+    /* Expanded dropdown gets same gradient background */
+    .navbar-admin .navbar-collapse,
+    .navbar-student .navbar-collapse {
+        padding: .75rem 0 1rem;
+        border-top: 1px solid rgba(255,255,255,.12);
+        margin-top: .5rem;
+    }
+
+    /* Nav links become full-width blocks */
+    .navbar-admin .nav-link,
+    .navbar-student .nav-link {
+        padding: .6rem 1rem !important;
+        border-radius: var(--radius-sm);
+        display: block;
+    }
+
+    /* User badge stacks neatly */
+    .navbar-user-badge {
+        padding: .5rem 1rem;
+        border-top: 1px solid rgba(255,255,255,.1);
+        margin-top: .5rem;
+    }
+
+    /* Logout button full width */
+    .navbar-admin .btn,
+    .navbar-student .btn {
+        width: 100%;
+        margin-top: .5rem;
+    }
+
+    /* Remove gap between nav items on mobile */
+    .navbar-nav.gap-1 { gap: 0 !important; }
+}
+
 @media (max-width: 768px) {
     .page-header { flex-direction: column; align-items: flex-start; }
     .filter-bar  { flex-direction: column; }
