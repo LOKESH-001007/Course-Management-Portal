@@ -3,7 +3,7 @@
 A full-stack Java web application for managing courses, students, and enrollments — built with Servlets, JSP, and MySQL.
 
 ## 🔗 Live Demo
-[Coming soon]
+https://course-management-portal-production.up.railway.app
 
 ## Features
 
