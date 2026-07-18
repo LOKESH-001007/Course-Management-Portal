@@ -35,22 +35,13 @@ public class AdminDAO {
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            // TEMP DEBUG — remove after troubleshooting
-            LOGGER.log(Level.SEVERE, "DEBUG: Connected to catalog = " + con.getCatalog()
-                    + " | attempting username = [" + username + "]");
-
             ps.setString(1, username);
 
             try (ResultSet rs = ps.executeQuery()) {
-                boolean found = rs.next();
-                LOGGER.log(Level.SEVERE, "DEBUG: row found = " + found);
-                if (found) {
+                if (rs.next()) {
                     String storedHash = rs.getString("password");
-                    LOGGER.log(Level.SEVERE, "DEBUG: stored hash = [" + storedHash + "]");
-                    boolean verified = PasswordUtil.verify(password, storedHash);
-                    LOGGER.log(Level.SEVERE, "DEBUG: password verify result = " + verified);
                     // BCrypt verification — safe against timing attacks
-                    if (verified) {
+                    if (PasswordUtil.verify(password, storedHash)) {
                         Admin admin = new Admin();
                         admin.setId(rs.getInt("id"));
                         admin.setUsername(rs.getString("username"));
@@ -62,10 +53,7 @@ public class AdminDAO {
             }
 
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Admin login error for user: " + username
-                    + " | exception=" + e.getClass().getName()
-                    + " | message=" + e.getMessage()
-                    + " | cause=" + (e.getCause() != null ? e.getCause().toString() : "none"));
+            LOGGER.log(Level.SEVERE, "Admin login error for user: " + username, e);
         }
 
         return null;
