@@ -35,13 +35,22 @@ public class AdminDAO {
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
+            // TEMP DEBUG — remove after troubleshooting
+            LOGGER.log(Level.SEVERE, "DEBUG: Connected to catalog = " + con.getCatalog()
+                    + " | attempting username = [" + username + "]");
+
             ps.setString(1, username);
 
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
+                boolean found = rs.next();
+                LOGGER.log(Level.SEVERE, "DEBUG: row found = " + found);
+                if (found) {
                     String storedHash = rs.getString("password");
+                    LOGGER.log(Level.SEVERE, "DEBUG: stored hash = [" + storedHash + "]");
+                    boolean verified = PasswordUtil.verify(password, storedHash);
+                    LOGGER.log(Level.SEVERE, "DEBUG: password verify result = " + verified);
                     // BCrypt verification — safe against timing attacks
-                    if (PasswordUtil.verify(password, storedHash)) {
+                    if (verified) {
                         Admin admin = new Admin();
                         admin.setId(rs.getInt("id"));
                         admin.setUsername(rs.getString("username"));
