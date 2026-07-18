@@ -62,7 +62,10 @@ public class AdminDAO {
             }
 
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Admin login error for user: " + username, e);
+            LOGGER.log(Level.SEVERE, "Admin login error for user: " + username
+                    + " | exception=" + e.getClass().getName()
+                    + " | message=" + e.getMessage()
+                    + " | cause=" + (e.getCause() != null ? e.getCause().toString() : "none"));
         }
 
         return null;
