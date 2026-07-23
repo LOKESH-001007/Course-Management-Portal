@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login — Course Management Portal</title>
+
+<meta property="og:title" content="Course Management Portal | Lokesh">
+<meta property="og:description" content="Enterprise learning platform with role-based student and admin access. Built with Java, MySQL, and Docker, deployed on Railway.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://courses.lokesh-dev.in/login.jsp">
+<meta property="og:image" content="https://courses.lokesh-dev.in/course-portal-preview.png">
+<meta name="robots" content="noindex, nofollow">
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 </head>
